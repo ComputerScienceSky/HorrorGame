@@ -32,6 +32,7 @@ def Intro():
 def choosePath():
     #choices
     wakeUp = input("Enter 'wake up' to continue\n")
+    #edit make user enter wake up
     print("\nYou wake up abruptly.")
     print("You look at the clock, it says 10:00 P.M.")
     
@@ -46,39 +47,49 @@ def Story(chosen):
         print("Your daughter's laughter has disapeared.")
         print("You call out your daughter's name")
         print("No responce. Dead silence.")
-        print("Actions: \n   <search room>\n   <go outside>\n") 
+        return 1
 
     if chosen == "search room":
         print()
         print("The room is cold and dark.")
         print("Ghastly shadows loom across the floor.")
-        print("Actions: \n   <search room>\n   <go outside>\n")
+        return 2
     
     else:
         print("Invalid Syntax")
 
-def choosePath2():
+def choosePath2(paths):
     #choices
     path = ""
-    while path != "call daughter" and path != "search room": # check for input validation
-        path = input("Actions: \n - <call daughter>\n - <search room> \n")
+    if paths == 1:
+        while path != "search room" and path != "go outside": # check for input validation
+            path = input("Actions: \n - <search room>\n - <go outside> \n")
+    if paths == 2:
+        while path != "call daughter" and path != "go outside": # check for input validation
+            path = input("Actions: \n - <call daughter>\n - <go outside> \n")
     return path
 
-def Story(chosen):
+def Story2(chosen):
     if chosen == "call daughter":
         print()
         print("Your daughter's laughter has disapeared.")
         print("You call out your daughter's name")
         print("No responce. Dead silence.")
-        print("Actions: \n - <search room>\n - <go outside>\n")
+        path = input("Actions: \n - <search room>\n - <go outside>\n")
         return 
 
     if chosen == "search room":
         print()
         print("The room is cold and dark.")
         print("Ghastly shadows loom across the floor.")
-        print("Actions: \n - <search room>\n - <go outside>\n")
-        return
+        path = input("Actions: \n - <call daughter>\n - <go outside>\n")
+        return path
+
+    if chosen == "go outside":
+        path = "go outside"
+        print("o")
+        return path
+        #i dont know what's going to go here
 
     else:
         print("Invalid Syntax")
@@ -88,7 +99,12 @@ playAgain = 'yes'
 while playAgain == 'yes':
     Intro()
     choice = choosePath()
-    Story(choice)
+    choice2 = Story(choice)
+    choice = choosePath2(choice2)
+    finalChoice = Story2(choice)
+    if finalChoice != "go outside":
+        print("You hear a noise and decide to go outside anyways.")
+        Story2("go outside")
     print("Do you want to play again? (yes or no)")
     playAgain = input()
 """  
