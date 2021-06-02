@@ -76,7 +76,7 @@ def Story2(chosen):
         print(dname+"!!!")
         print("No responce.")
         path = input("Actions: \n   <search room>\n   <go outside>\n")
-        return 
+        return path
 
     if chosen == "search room":
         print()
@@ -90,7 +90,6 @@ def Story2(chosen):
         print("It's dark.")
         print("You see a trail of large muddy footsteps.")
         print("Smaller footsteps follow it.")
-        path = input("Actions: \n   <follow footsteps>\n   <examine trail>\n")
         return 1
 
     if chosen == "open light":
@@ -99,7 +98,6 @@ def Story2(chosen):
         print("They're bright.")
         print("To your right, you see a picture")
         print("To your left, you see a small TV projecting the news.")  
-        path = input("Actions: \n   <look at picture>\n   <look at news>\n")
         return 2
 
     else:
@@ -109,10 +107,10 @@ def choosePath3(paths):
     #choices
     path = ""
     if paths == 1:
-        while path != "search room" and path != "go outside": 
+        while path != "follow footsteps" and path != "examine trail": 
             path = input("Actions: \n   <follow footsteps>\n   <examine trail> \n")
     if paths == 2:
-        while path != "call daughter" and path != "open light": 
+        while path != "look at picture" and path != "look at news": 
             path = input("Actions: \n   <look at picture>\n   <look at news> \n")
     return path
 
@@ -121,40 +119,40 @@ def Story3(chosen):
         print()
         print("small blood splatters surround the footsteps")
         print("You see some of your daughter's hair.")
-        path = input("Actions: \n   <follow trail>")
+        path = input("Actions: \n   <follow trail> \n   <look at news>")
+        return path
 
-    if chosen == "follow trail":
+    if chosen == "follow footsteps":
         print()
         print("you follow the footsteps.")
         print("the mud squishes beneath your feet")
         print("It leads you to a tree.")
-        path = input("Actions: \n   <examine tree>\n   <follow trail>")
+        return 1
 
     if chosen == "look at picture":
         print()
         print("It's your daughter.")
         print("dark hair, pale skin, shinning eyes...")
         path = input("Actions: \n   <look at news>")
+        return path
 
     if chosen == "look at news":
         print()
         print("PSYCHOPATH' ON THE LOOSE: Police confirm that a killer who escaped from a psychiatric facility boarded a flight...")
         print("police and the FBI are trying to track him down...")
         print("Last spotted was in New Jersey.")
-        path = input("Actions: \n   <look at picture>\n   <call daughter>")
+        path = input("Actions: \n   <look at picture>\n   <examine trail>")
+        return path
 
     else:
         print("Invalid Syntax")
 
-def choosePath4(paths):
+def choosePath4():
     #choices
     path = ""
-    if paths == 1:
-        while path != "search room" and path != "go outside": 
-            path = input("Actions: \n   <search room>\n   <go outside> \n")
-    if paths == 2:
-        while path != "call daughter" and path != "open light": 
-            path = input("Actions: \n   <call daughter>\n   <open light> \n")
+    while path != "examine tree" and path != "????????": 
+        path = input("Actions: \n   <examine tree>\n   <???????> \n")
+
     return path
 
 def Story4(chosen):
@@ -175,8 +173,14 @@ while playAgain == 'yes':
     choice = choosePath()
     choice2 = Story(choice)
     choice = choosePath2(choice2)
-    Story2(choice)
-
+    end2 = Story2(choice)
+    while end2 != 1 and end2 != 2:
+        end2 = Story2(end2)
+    choice3 = choosePath3(end2)
+    end3 = Story3(choice3)
+    while end3 != 1:
+        end3 = Story3(end3)
+    choice4 = choosePath4()
     print("Do you want to play again? (yes or no)")
     playAgain = input()
 """  
